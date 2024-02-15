@@ -6,5 +6,59 @@
 </head>
 <body>
 
+<h1>Bestilling av kinobilletter</h1>
+
+<tr><td>Velg Film</td></tr>
+<select id="Film">
+    <option>Velg film</option>
+    <option>Star Wars ep1</option>
+    <option>Star Wars ep2</option>
+    <option>Star Wars ep3</option>
+    <option>Star Wars ep4</option>
+    <option>Star Wars ep5</option>
+    <option>Star Wars ep6</option>
+</select>
+
+<br><br>
+
+<tr><td>Antall</td></tr>
+<input type="number" id="Antall">
+<p id="aFeilmelding"></p>
+
+<br><br>
+
+<tr><td>Fornavn</td></tr>
+<input type="text" id="Fnavn">
+<p id="feilFnavn"></p>
+
+<br><br>
+
+<tr><td>Etternavn</td></tr>
+<input type="text" id="Enavn">
+<p id="feilEnavn"></p>
+
+<br><br>
+<tr><td>Tlf nummer</td></tr>
+<input type="text" id="Tlfnr">
+<p id="feilTlfnr"></p>
+
+<br><br>
+<tr><td>E-post</td></tr>
+<input type="email" id="Epost">
+<p id="feilEpost"></p>
+
+<br><br>
+
+<input type="button" value="Kjøp billett" onclick="enKnapp()">
+
+<h2>Alle billetter</h2>
+
+<div><p id="visBilletter"></p></div>
+
+<input type="button" value="Slett alle" onclick="slettAlt()">
+
+
+
+<script src="Billetsalg.js"></script>
 </body>
 </html>
