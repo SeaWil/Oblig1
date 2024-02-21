@@ -97,7 +97,7 @@ function sjekkEnavn() {
 function sjekkTlfnr() {
     let utTlfnr = "Ugyldig telefonnummer"
     let tall2 = Number(document.getElementById("Tlfnr").value);
-    if (10000000 > document.getElementById("Tlfnr").value || document.getElementById("Tlfnr") > 99999999) {
+    if (isNaN(tall2) || 10000000 > document.getElementById("Tlfnr").value || document.getElementById("Tlfnr") > 99999999) {
         document.getElementById("feilTlfnr").innerHTML = utTlfnr;
         return false
     } else {
@@ -106,21 +106,22 @@ function sjekkTlfnr() {
     }
 }
 
-function sjekkEpost() {
-    let utEpost = "Ugyldig epost-adresse"
-    const sjekkEpost = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-    let sjekk = sjekkEpost.test(document.getElementById("Epost").value)
-    if (sjekk == false) {
-        document.getElementById("feilEpost").innerHTML = utEpost
-        return false
-    } else {
-        document.getElementById("feilEpost").innerHTML = "";
-        return true
+    function sjekkEpost() {
+        let utEpost = "Ugyldig epost-adresse"
+        const sjekkEpost = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        let sjekk = sjekkEpost.test(document.getElementById("Epost").value)
+        if (sjekk == false) {
+            document.getElementById("feilEpost").innerHTML = utEpost
+            return false
+        } else {
+            document.getElementById("feilEpost").innerHTML = "";
+            return true
+        }
     }
-}
 
     function slettAlt() {
         billetterSolgt.length = 0;
         document.getElementById("visBilletter").innerHTML = "";
 
-}
+    }
+
