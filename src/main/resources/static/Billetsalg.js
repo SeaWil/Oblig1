@@ -1,12 +1,12 @@
 function enKnapp() {
-    let godkjent = true;
+    // let godkjent = true;
     sjekkAntall();
     sjekkFnavn();
     sjekkEnavn();
     sjekkTlfnr();
     sjekkEpost();
-    if (sjekkAntall() == false || sjekkFnavn() == false || sjekkEnavn() == false || sjekkTlfnr() == false || sjekkEpost() == false) {
-        godkjent = false;
+    if (sjekkAntall() === false || sjekkFnavn() === false || sjekkEnavn() === false || sjekkTlfnr() === false || sjekkEpost() === false) {
+        // godkjent = false;
     } else {
         registrere();
         visBilletter();
@@ -74,7 +74,7 @@ function sjekkAntall() {
 
 function sjekkFnavn() {
     let utFnavn = "Ugyldig fornavn"
-    if (document.getElementById("Fnavn").value == "") {
+    if (document.getElementById("Fnavn").value === "") {
         document.getElementById("feilFnavn").innerHTML = utFnavn;
         return false
     } else {
@@ -85,7 +85,7 @@ function sjekkFnavn() {
 
 function sjekkEnavn() {
     let utEnavn = "Ugyldig etternavn"
-    if (document.getElementById("Enavn").value == "") {
+    if (document.getElementById("Enavn").value === "") {
         document.getElementById("feilEnavn").innerHTML = utEnavn;
         return false
     } else {
@@ -95,10 +95,11 @@ function sjekkEnavn() {
 }
 
 function sjekkTlfnr() {
-    let utTlfnr = "Ugyldig telefonnummer"
-    let tall2 = Number(document.getElementById("Tlfnr").value);
-    if (isNaN(tall2) || 10000000 > document.getElementById("Tlfnr").value || document.getElementById("Tlfnr") > 99999999) {
-        document.getElementById("feilTlfnr").innerHTML = utTlfnr;
+    let outNumber = "Ugyldig telefonnummer"
+    let inPhone = document.getElementById("Tlfnr").value;
+    let regex = /^[2-9]\d{7}$/
+    if (!regex.test(inPhone)) {
+        document.getElementById("feilTlfnr").innerHTML = outNumber;
         return false
     } else {
         document.getElementById("feilTlfnr").innerHTML = "";
@@ -108,9 +109,9 @@ function sjekkTlfnr() {
 
     function sjekkEpost() {
         let utEpost = "Ugyldig epost-adresse"
-        const sjekkEpost = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-        let sjekk = sjekkEpost.test(document.getElementById("Epost").value)
-        if (sjekk == false) {
+        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        let sjekk = emailRegex.test(document.getElementById("Epost").value)
+        if (sjekk === false) {
             document.getElementById("feilEpost").innerHTML = utEpost
             return false
         } else {
