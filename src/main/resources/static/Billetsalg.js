@@ -13,15 +13,16 @@ function enKnapp() {
         resetFelter();
     }
 }
+
 const billetterSolgt = [];
 
 function registrere() {
-    const film = document.getElementById("Film").value;
-    const antall = document.getElementById("Antall").value;
-    const fnavn = document.getElementById("Fnavn").value;
-    const enavn = document.getElementById("Enavn").value;
-    const tlfnr = document.getElementById("Tlfnr").value;
-    const epost = document.getElementById("Epost").value;
+    const film = $("#Film").val();
+    const antall = $("#Antall").val();
+    const fnavn = $("#Fnavn").val();
+    const enavn = $("#Enavn").val();
+    const tlfnr = $("#Tlfnr").val();
+    const epost = $("#Epost").val();
 
     const billett = {
         film: film,
@@ -35,11 +36,11 @@ function registrere() {
 }
 
 function resetFelter() {
-    document.getElementById("Antall").value = "";
-    document.getElementById("Fnavn").value = "";
-    document.getElementById("Enavn").value = "";
-    document.getElementById("Tlfnr").value = "";
-    document.getElementById("Epost").value = "";
+    $("#Antall").val("");
+    $("#Fnavn").val("");
+    $("#Enavn").val("");
+    $("#Tlfnr").val("");
+    $("#Epost").val("");
 
 }
 
@@ -53,7 +54,7 @@ function visBilletter() {
             + p.fnavn + "</td><td>" + p.enavn + "</td><td>" + p.tlfnr + "</td><td>" + p.epost + "</td>" +
             "</tr>";
 
-        document.getElementById("visBilletter").innerHTML = visBillett;
+        $("#visBilletter").html(visBillett);
 
     }
 }
@@ -61,68 +62,68 @@ function visBilletter() {
 
 function sjekkAntall() {
     let utAntall = "Hvor mang billetter"
-    let tall = Number(document.getElementById("Antall").value)
+    let tall = Number($("#Antall").val())
 
     if (tall < 1) {
-        document.getElementById("aFeilmelding").innerHTML = utAntall;
+        $("#aFeilmelding").html(utAntall);
         return false
     } else {
-        document.getElementById("aFeilmelding").innerHTML = "";
+        $("#aFeilmelding").html("");
         return true
     }
 }
 
 function sjekkFnavn() {
     let utFnavn = "Ugyldig fornavn"
-    if (document.getElementById("Fnavn").value === "") {
-        document.getElementById("feilFnavn").innerHTML = utFnavn;
+    if ($("#Fnavn").val() === "") {
+        $("#feilFnavn").html(utFnavn);
         return false
     } else {
-        document.getElementById("feilFnavn").innerHTML = "";
+        $("#feilFnavn").html("");
         return true
     }
 }
 
 function sjekkEnavn() {
     let utEnavn = "Ugyldig etternavn"
-    if (document.getElementById("Enavn").value === "") {
-        document.getElementById("feilEnavn").innerHTML = utEnavn;
+    if ($("#Enavn").val() === "") {
+        $("#feilEnavn").html(utEnavn);
         return false
     } else {
-        document.getElementById("feilEnavn").innerHTML = "";
+        $("#feilEnavn").html("");
         return true
     }
 }
 
 function sjekkTlfnr() {
     let outNumber = "Ugyldig telefonnummer"
-    let inPhone = document.getElementById("Tlfnr").value;
+    let inPhone = $("#Tlfnr").val();
     let regex = /^[2-9]\d{7}$/
     if (!regex.test(inPhone)) {
-        document.getElementById("feilTlfnr").innerHTML = outNumber;
+        $("#feilTlfnr").html(outNumber);
         return false
     } else {
-        document.getElementById("feilTlfnr").innerHTML = "";
+        $("#feilTlfnr").html("");
         return true
     }
 }
 
-    function sjekkEpost() {
-        let utEpost = "Ugyldig epost-adresse"
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-        let sjekk = emailRegex.test(document.getElementById("Epost").value)
-        if (sjekk === false) {
-            document.getElementById("feilEpost").innerHTML = utEpost
-            return false
-        } else {
-            document.getElementById("feilEpost").innerHTML = "";
-            return true
-        }
+function sjekkEpost() {
+    let utEpost = "Ugyldig epost-adresse"
+    const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+    let sjekk = emailRegex.test($("#Epost").val())
+    if (sjekk === false) {
+        $("#feilEpost").html(utEpost);
+        return false
+    } else {
+        $("#feilEpost").html("");
+        return true
     }
+}
 
-    function slettAlt() {
-        billetterSolgt.length = 0;
-        document.getElementById("visBilletter").innerHTML = "";
+function slettAlt() {
+    billetterSolgt.length = 0;
+    $("#visBilletter").html("");
 
-    }
+}
 
