@@ -1,38 +1,79 @@
-function enKnapp() {
-    // let godkjent = true;
-    sjekkAntall();
-    sjekkFnavn();
-    sjekkEnavn();
-    sjekkTlfnr();
-    sjekkEpost();
-    if (sjekkAntall() === false || sjekkFnavn() === false || sjekkEnavn() === false || sjekkTlfnr() === false || sjekkEpost() === false) {
-        // godkjent = false;
-    } else {
-        registrere();
-        visBilletter();
-        resetFelter();
+$(document).ready(function(){
+
+$("#registerButton").click(function (){
+    //function enKnapp() {
+        // let godkjent = true;
+        sjekkAntall();
+        sjekkFnavn();
+        sjekkEnavn();
+        sjekkTlfnr();
+        sjekkEpost();
+        if (sjekkAntall() === false || sjekkFnavn() === false || sjekkEnavn() === false || sjekkTlfnr() === false || sjekkEpost() === false) {
+            // godkjent = false;
+        } else {
+            registrere();   //muligens putte inn if/else, for å sjekke at et steg er vellykket før neste begynner
+            visBilletter();
+            resetFelter();
+        }
+    //}
+})
+
+
+
+
+// function registrere() {
+//     const billett = {
+//         film: $("#Film").val(),
+//         antall: $("#Antall").val(),
+//         fnavn: $("#Fnavn").val(),
+//         enavn: $("#Enavn").val(),
+//         tlfnr: $("#Tlfnr").val(),
+//         epost: $("#Epost").val()
+//     }
+//     $.post("/registerTicket", billett, function () {
+//     })
+// }
+function registrere() {
+    const billett = {
+        film: $("#Film").val(),
+        antall: $("#Antall").val(),
+        fnavn: $("#Fnavn").val(),
+        enavn: $("#Enavn").val(),
+        tlfnr: $("#Tlfnr").val(),
+        epost: $("#Epost").val()
     }
+    $.post("/registerTicket", billett)
+        .done(function(response) {
+            console.log(response);
+            alert("Ticket registered successfully");
+        })
+        .fail(function(xhr, status, error) {
+            console.error(xhr, status, error);
+            alert("Failed to register ticket");
+        });
 }
 
-const billetterSolgt = [];
+function visBilletter() {
+    let visBillett = "";
 
-function registrere() {
-    const film = $("#Film").val();
-    const antall = $("#Antall").val();
-    const fnavn = $("#Fnavn").val();
-    const enavn = $("#Enavn").val();
-    const tlfnr = $("#Tlfnr").val();
-    const epost = $("#Epost").val();
+    $.get("/getTicket", function (data) {
+        console.log(data)
 
-    const billett = {
-        film: film,
-        antall: antall,
-        fnavn: fnavn,
-        enavn: enavn,
-        tlfnr: tlfnr,
-        epost: epost
-    }
-    billetterSolgt.push(billett);
+     /*   //format overskrifter
+        visBillett = "<table><tr>" + "<th>Film</th><th>Antall</th>" +
+            "<th>Fornavn</th><th>Etternavn</th><th>Telefonnummer</th><th>Epost</th></tr>";
+
+        //innhold av "ticket"
+        for (let p of data) {
+            visBillett += "<tr>" +
+                "<td>" + p.film + "</td><td>" + p.antall + "</td><td>"
+                + p.fnavn + "</td><td>" + p.enavn + "</td><td>" + p.tlfnr + "</td><td>" + p.epost + "</td>" +
+                "</tr>";
+        }
+        visBillett+= "</table>";
+        $("#visBilletter").html(visBillett);*/
+
+    })
 }
 
 function resetFelter() {
@@ -43,22 +84,6 @@ function resetFelter() {
     $("#Epost").val("");
 
 }
-
-function visBilletter() {
-    let visBillett = "<table><tr>" + "<th>Film</th><th>Antall</th>" +
-        "<th>Fornavn</th><th>Etternavn</th><th>Telefonnummer</th><th>Epost</th></tr>";
-
-    for (let p of billetterSolgt) {
-        visBillett += "<tr>" +
-            "<td>" + p.film + "</td><td>" + p.antall + "</td><td>"
-            + p.fnavn + "</td><td>" + p.enavn + "</td><td>" + p.tlfnr + "</td><td>" + p.epost + "</td>" +
-            "</tr>";
-
-        $("#visBilletter").html(visBillett);
-
-    }
-}
-
 
 function sjekkAntall() {
     let utAntall = "Hvor mang billetter"
@@ -126,4 +151,9 @@ function slettAlt() {
     $("#visBilletter").html("");
 
 }
+})
 
+/*
+*   billetterSolgt: flyttet til COntroller fra visBilletter
+*
+* */
